@@ -47,6 +47,12 @@ app.init = function(){
   app.spotlight = app.createSpotLight();
   app.scene.add( app.spotlight)
 
+  app.cube = app.createCube()
+  app.scene.add( app.cube )
+
+  app.sphere = app.createSphere()
+  app.scene.add( app.sphere )
+
 
 
 
@@ -65,7 +71,7 @@ app.init = function(){
 app.createSpotLight = function(){
 
   var spotlight = new THREE.SpotLight( 0xFFFFFF );
-  spotlight.position.set( -10, 60, 10);
+  spotlight.position.set( 30, 60, 10);
   spotlight.castShadow = true
   spotlight.shadow.mapSize.width = 2048
   spotlight.shadow.mapSize.height = 2048
@@ -73,6 +79,36 @@ app.createSpotLight = function(){
   return spotlight
 
 }
+
+app.createSphere = function(){
+
+  var sphereGeometry = new THREE.SphereGeometry( 4, 30, 30)
+  var sphereMaterial = new THREE.MeshLambertMaterial({
+    color: 0x039BE5
+  })
+
+  var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial)
+
+  sphere.position.set( 20, 4, 2)
+  sphere.castShadow = true
+  return sphere
+}
+
+app.createCube = function(){
+
+  var cubeGeometry = new THREE.BoxGeometry( 4, 4, 4);
+  var cubeMaterial = new THREE.MeshLambertMaterial({
+    color: 0xff8f00
+  })
+
+  var cube = new THREE.Mesh( cubeGeometry, cubeMaterial )
+
+  cube.position.set( -4, 3, 0 )
+  cube.castShadow = true
+
+  return cube
+  }
+
 
 app.createPlane = function(){
   var planeGeometry = new THREE.PlaneGeometry( 120, 20)
