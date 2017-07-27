@@ -41,6 +41,12 @@ app.init = function(){
   app.axes = new THREE.AxisHelper( 40 );
   app.scene.add( app.axes );
 
+  app.plane = app.createPlane()
+  app.scene.add( app.plane )
+
+  app.spotlight = app.createSpotLight();
+  app.scene.add( app.spotlight)
+
 
 
 
@@ -56,8 +62,33 @@ app.init = function(){
 
 }; // app.init
 
+app.createSpotLight = function(){
+
+  var spotlight = new THREE.SpotLight( 0xFFFFFF );
+  spotlight.position.set( -10, 60, 10);
+  spotlight.castShadow = true
+  spotlight.shadow.mapSize.width = 2048
+  spotlight.shadow.mapSize.height = 2048
+
+  return spotlight
+
+}
 
 app.createPlane = function(){
+  var planeGeometry = new THREE.PlaneGeometry( 120, 20)
+  var planeMaterial = new THREE.MeshLambertMaterial({
+    color: 0xCFD8DB
+  });
+
+  //combine
+  var plane = new THREE.Mesh( planeGeometry, planeMaterial)
+  plane.position.x = 15
+  plane.position.y = 0
+  plane.position.z = 0
+  plane.rotation.x = -0.5 * Math.PI; // don't ask
+  plane.recieveShadow = true;
+
+  return plane;
 
 };
 
